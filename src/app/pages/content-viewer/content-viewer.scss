@@ -1,0 +1,95 @@
+:host {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: block;
+}
+
+.content-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(4px);
+}
+
+.content-shell {
+  position: relative;
+  max-width: min(92vw, 1500px);
+  max-height: min(88vh, 900px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  width: 2.15rem;
+  height: 2.15rem;
+  border: 1px solid var(--cr-border);
+  border-radius: 999px;
+  background-color: rgba(15, 15, 15, 0.85);
+  color: var(--cr-text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+
+  &:hover {
+    border-color: var(--cr-orange);
+    color: var(--cr-orange);
+    background-color: rgba(15, 15, 15, 0.95);
+  }
+
+  .close-icon {
+    max-height: 20px;
+    max-width: 20px;
+  }
+}
+
+.element {
+  width: min(92vw, 1500px);
+  height: min(88vh, 900px);
+  display: block;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 1px solid var(--cr-border);
+  background-color: var(--cr-bg-card);
+  box-shadow:
+    0 22px 60px rgba(0, 0, 0, 0.65),
+    0 0 0 2px rgba(244, 117, 33, 0.18);
+}
+
+video.element {
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .content-modal {
+    padding: 1rem;
+  }
+
+  .element {
+    width: 96vw;
+    height: 80vh;
+    border-radius: 8px;
+  }
+
+  .close-btn {
+    top: 0.5rem;
+    right: 0.5rem;
+    .close-icon {
+      max-height: 20px !important;
+      max-width: 20px !important;
+    }
+  }
+}

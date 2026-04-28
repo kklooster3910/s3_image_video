@@ -1,0 +1,17 @@
+<div class="content-modal" (click)="close.emit()">
+  <div class="content-shell" (click)="$event.stopPropagation()">
+    <button
+      class="close-btn"
+      type="button"
+      (click)="close.emit()"
+      aria-label="Close viewer"
+    >
+      <span class="close-icon" aria-hidden="true">&times;</span>
+    </button>
+    @if (file.type === 'img') {
+      <img class="element" [src]="file.url" alt="Selected media" />
+    } @else {
+      <video controls class="element" [src]="file.url"></video>
+    }
+  </div>
+</div>

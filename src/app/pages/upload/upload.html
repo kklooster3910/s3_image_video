@@ -1,0 +1,26 @@
+<div>
+  <div class="page-header">
+    <h2>&#9650; Upload Media</h2>
+  </div>
+  <mat-form-field>
+    <mat-label>
+      <span class="dropzone-label">
+        <mat-icon>cloud_upload</mat-icon>
+        Drop Images or Videos
+      </span>
+    </mat-label>
+    <ngx-mat-dropzone>
+      <input type="file" [formControl]="fileCtrl" fileInput multiple />
+      @for (file of getFiles(); track file.name) {
+        <mat-chip-row (removed)="removeFile(file)">
+          {{ file.name }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      }
+    </ngx-mat-dropzone>
+    <mat-error class="error">File Missing or Invalid File Type</mat-error>
+  </mat-form-field>
+  <button (click)="upload()" type="submit">Upload</button>
+</div>

@@ -1,0 +1,40 @@
+<div>
+  <div class="page-header">
+    <h2>&#9654; Media Library</h2>
+    <a routerLink="/upload" class="cr-upload-btn">+ Upload</a>
+  </div>
+  @if (fileList().length === 0) {
+    <p class="empty-state">No media found. Upload something!</p>
+  }
+  <ul>
+    @for (file of fileList(); track file.url) {
+      @if (file.type === 'img') {
+        <div>
+          <p (click)="deleteFile(file.key)">DELETE</p>
+          <li (click)="openContent(file)">
+            <img class="element" [src]="file.url" alt="Media thumbnail" />
+          </li>
+        </div>
+      } @else {
+        <div>
+          <p (click)="deleteFile(file.key)">DELETE</p>
+          <li>
+            <video
+              (click)="
+                openContent(file);
+                $event.preventDefault();
+                $event.stopPropagation()
+              "
+              controls
+              class="element"
+              [src]="file.url + '#1.5'"
+            ></video>
+          </li>
+        </div>
+      }
+    }
+  </ul>
+  @if (contentOpen) {
+    <app-content-viewer [file]="currentFile" (close)="closeContent()" />
+  }
+</div>

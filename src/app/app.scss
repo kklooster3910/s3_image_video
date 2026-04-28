@@ -1,0 +1,99 @@
+.main {
+  min-height: 100vh;
+  background-color: var(--cr-bg-primary);
+}
+
+// ── Nav bar ──────────────────────────────────────────────────────────────────
+.cr-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0 2rem;
+  height: 56px;
+  background-color: var(--cr-bg-secondary);
+  border-bottom: 2px solid var(--cr-orange);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.cr-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: auto;
+}
+
+.cr-nav-logo {
+  color: var(--cr-orange);
+  font-size: 1.3rem;
+}
+
+.cr-nav-title {
+  color: var(--cr-text-primary);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.cr-nav-links {
+  display: flex;
+  gap: 0.25rem;
+
+  a {
+    color: var(--cr-text-secondary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.85rem;
+    border-radius: 4px;
+    transition: color 0.2s, background-color 0.2s;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--cr-text-primary);
+      background-color: var(--cr-bg-elevated);
+    }
+
+    &.active {
+      color: var(--cr-orange);
+      background-color: rgba(244, 117, 33, 0.1);
+    }
+  }
+}
+
+.cr-nav-logout {
+  background: transparent;
+  border: 1px solid var(--cr-border);
+  color: var(--cr-text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.85rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+
+  &:hover {
+    border-color: var(--cr-orange);
+    color: var(--cr-orange);
+    background-color: transparent;
+  }
+}
+
+// ── Page wrapper ─────────────────────────────────────────────────────────────
+.content {
+  min-height: calc(100vh - 56px);
+  background-color: var(--cr-bg-primary);
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--cr-bg-primary);
+}

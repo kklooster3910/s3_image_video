@@ -1,0 +1,28 @@
+<div class="login">
+  <div class="login-card">
+    <div class="login-logo">
+      <h1>&#9654; STREAM</h1>
+      <p>Sign in to continue</p>
+    </div>
+    <form class="login-form" [formGroup]="form" (ngSubmit)="login()">
+      <div>
+        <label class="login-form-label">Username</label>
+        <input type="text" placeholder="Enter username" formControlName="username" />
+        @if (form.get('username')?.invalid && form.get('username')?.touched) {
+          <p class="error">Username required</p>
+        }
+      </div>
+      <div>
+        <label class="login-form-label">Password</label>
+        <input type="password" placeholder="Enter password" formControlName="password" />
+        @if (form.get('password')?.invalid && form.get('password')?.touched) {
+          <p class="error">Password required</p>
+        }
+      </div>
+      <button type="submit">Sign In</button>
+      @if (form.errors?.['invalidCredentials']) {
+        <p class="error">Invalid username or password</p>
+      }
+    </form>
+  </div>
+</div>

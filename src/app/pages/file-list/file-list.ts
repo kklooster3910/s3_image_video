@@ -145,7 +145,6 @@ export class FileList implements OnInit {
     try {
       this.isLoading.set(true);
       const success = await this.api.deleteFile(this.pendingDeleteKey);
-      this.isLoading.set(false);
       if (success) {
         const updatedList = await this.api.getFileList();
         this.fullList = updatedList;

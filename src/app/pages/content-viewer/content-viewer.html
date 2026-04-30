@@ -1,17 +1,35 @@
 <div class="content-modal" (click)="close.emit()">
-  <div class="content-shell" (click)="$event.stopPropagation()">
+  <div class="content-shell">
     <button
-      class="close-btn"
+      class="nav-btn nav-btn--prev"
       type="button"
-      (click)="close.emit()"
-      aria-label="Close viewer"
+      aria-label="Previous"
+      (click)="$event.stopPropagation(); contentScroll.emit('prev')"
     >
-      <span class="close-icon" aria-hidden="true">&times;</span>
+      &#8249;
     </button>
-    @if (file.type === 'img') {
-      <img class="element" [src]="file.url" alt="Selected media" />
-    } @else {
-      <video controls class="element" [src]="file.url"></video>
-    }
+    <div class="media-wrapper" (click)="$event.stopPropagation()">
+      <button
+        class="close-btn"
+        type="button"
+        (click)="close.emit()"
+        aria-label="Close viewer"
+      >
+        <span class="close-icon" aria-hidden="true">&times;</span>
+      </button>
+      @if (file.type === 'img') {
+        <img class="element" [src]="file.url" alt="Selected media" />
+      } @else {
+        <video controls class="element" [src]="file.url"></video>
+      }
+    </div>
+    <button
+      class="nav-btn nav-btn--next"
+      type="button"
+      aria-label="Next"
+      (click)="$event.stopPropagation(); contentScroll.emit('next')"
+    >
+      &#8250;
+    </button>
   </div>
 </div>

@@ -1,40 +1,148 @@
-<div>
-  <div class="page-header">
-    <h2>&#9654; Media Library</h2>
-    <a routerLink="/upload" class="cr-upload-btn">+ Upload</a>
-  </div>
-  @if (fileList().length === 0) {
-    <p class="empty-state">No media found. Upload something!</p>
-  }
-  <ul>
-    @for (file of fileList(); track file.url) {
-      @if (file.type === 'img') {
-        <div>
-          <p (click)="deleteFile(file.key)">DELETE</p>
-          <li (click)="openContent(file)">
-            <img class="element" [src]="file.url" alt="Media thumbnail" />
-          </li>
-        </div>
+<div class="main-container">
+  <div class="content-state">
+    @if (isLoading()) {
+      <div class="spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+    } @else {
+      @if (fileList().length === 0) {
+        <p class="empty-state">No media found. Upload something!</p>
       } @else {
-        <div>
-          <p (click)="deleteFile(file.key)">DELETE</p>
-          <li>
-            <video
-              (click)="
-                openContent(file);
-                $event.preventDefault();
-                $event.stopPropagation()
-              "
-              controls
-              class="element"
-              [src]="file.url + '#1.5'"
-            ></video>
-          </li>
+        <div class="options-container">
+          <div class="filter">
+            <mat-form-field>
+              <mat-label>Filter</mat-label>
+              <mat-select (selectionChange)="filter($event)">
+                @for (option of filterOptions; track option) {
+                  <mat-option [value]="option">{{ option }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="sort">
+            <mat-form-field>
+              <mat-label>Sort</mat-label>
+              <mat-select (selectionChange)="sort($event)">
+                @for (option of sortOptions; track option) {
+                  <mat-option [value]="option">{{ option }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
+        <ul>
+          @for (file of fileList(); track file.url) {
+            @if (file.type === 'img') {
+              <div>
+                <div class="file-meta">
+                  <button
+                    class="delete-btn"
+                    type="button"
+                    (click)="
+                      deleteAttempt(true); setPendingDeleteKey(file.key)
+                    "
+                    aria-label="Delete file"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                  <div class="file-details">
+                    <p class="file-name" [title]="file.key">
+                      {{ file.key }}
+                    </p>
+                  </div>
+                </div>
+                <li (click)="openContent(file)">
+                  <img
+                    class="element"
+                    [src]="file.url"
+                    alt="Media thumbnail"
+                  />
+                </li>
+                <p
+                  class="file-name uploaded-meta"
+                  [title]="'Uploaded: ' + file.lastModified"
+                >
+                  Uploaded: {{ file.lastModified }}
+                </p>
+              </div>
+            } @else {
+              <div>
+                <div class="file-meta">
+                  <button
+                    class="delete-btn"
+                    type="button"
+                    (click)="
+                      deleteAttempt(true); setPendingDeleteKey(file.key)
+                    "
+                    aria-label="Delete file"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                  <div class="file-details">
+                    <p class="file-name" [title]="file.key">
+                      {{ file.key }}
+                    </p>
+                  </div>
+                </div>
+                <li>
+                  <video
+                    (click)="
+                      openContent(file);
+                      $event.preventDefault();
+                      $event.stopPropagation()
+                    "
+                    controls
+                    class="element"
+                    [src]="file.url + '#1.5'"
+                  ></video>
+                </li>
+                <p
+                  class="file-name uploaded-meta"
+                  [title]="'Uploaded: ' + file.lastModified"
+                >
+                  Uploaded: {{ file.lastModified }}
+                </p>
+              </div>
+            }
+          }
+        </ul>
       }
     }
-  </ul>
+  </div>
+  @if (isTryingToDelete()) {
+    <div class="delete-modal" (click)="deleteAttempt(false)">
+      <div class="delete-shell" (click)="$event.stopPropagation()">
+        <div class="delete-modal-card">
+          <h3 class="delete-modal-title">Delete file?</h3>
+          <p class="delete-modal-text">
+            Are you sure you want to delete this file? This action cannot
+            be undone.
+          </p>
+          <div class="delete-modal-actions">
+            <button
+              type="button"
+              (click)="deleteAttempt(false)"
+              class="delete-modal-btn delete-modal-btn--cancel"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              (click)="deleteAttempt(false); deleteFile()"
+              class="delete-modal-btn delete-modal-btn--confirm"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
   @if (contentOpen) {
-    <app-content-viewer [file]="currentFile" (close)="closeContent()" />
+    <app-content-viewer
+      [file]="currentFile"
+      (close)="closeContent()"
+      (contentScroll)="contentScroll($event)"
+    />
   }
 </div>

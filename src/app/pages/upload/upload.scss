@@ -7,6 +7,13 @@
   min-height: 100vh;
 }
 
+.spinner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
 .page-header {
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
@@ -37,7 +44,9 @@ ngx-mat-dropzone {
   border: 2px dashed var(--cr-border);
   border-radius: 8px;
   cursor: pointer;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 
   input {
     display: none;
@@ -76,7 +85,7 @@ ngx-mat-dropzone {
   border: 1px solid var(--cr-border);
 }
 
-button[type='submit'] {
+button[type="submit"] {
   margin-top: 1.25rem;
   width: 100%;
   padding: 0.75rem;

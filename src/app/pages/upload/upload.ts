@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   ReactiveFormsModule,
@@ -18,6 +18,8 @@ import {
 import { MatDropzone } from '@ngx-dropzone/material';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+
 import { Api } from '../../services/api';
 
 @Component({
@@ -32,13 +34,15 @@ import { Api } from '../../services/api';
     MatIconModule,
     MatError,
     MatChipsModule,
+    MatProgressSpinner,
   ],
   templateUrl: './upload.html',
   styleUrl: './upload.scss',
 })
 export class Upload {
-  private api = inject(Api);
-  private router = inject(Router);
+  protected api = inject(Api);
+  protected router = inject(Router);
+  protected isLoading = signal<boolean>(false);
 
   getFiles(): File[] {
     const files = this.fileCtrl.value;
@@ -54,9 +58,15 @@ export class Upload {
 
   async upload() {
     this.fileCtrl.markAsTouched();
-    const files = this.fileCtrl.value;
-    const success = await this.api.upload(files);
-    if (success) this.router.navigate(['/file-list']);
+    this.isLoading.set(true);
+    try {
+      const files = this.fileCtrl.value;
+      const success = await this.api.upload(files);
+      if (success) this.router.navigate(['/file-list']);
+    } catch (error) {
+      console.log('error uploading files', { error });
+      this.isLoading.set(false);
+    }
   }
 
   removeFile(file: File) {
@@ -65,11 +75,5 @@ export class Upload {
       const updatedFiles = currentFiles.filter((f) => f != file);
       this.fileCtrl.setValue(updatedFiles);
     }
-  }
-
-  // this is to diplay the file count, probs don't need this
-  getFileCount() {
-    const formInput = this.fileCtrl.value;
-    return Array.isArray(formInput) ? formInput.length : formInput ? 1 : 0;
   }
 }

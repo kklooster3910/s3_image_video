@@ -18,11 +18,47 @@
 
 .content-shell {
   position: relative;
-  max-width: min(92vw, 1500px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.media-wrapper {
+  position: relative;
+  max-width: min(84vw, 1400px);
   max-height: min(88vh, 900px);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.nav-btn {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  padding: 0 0 0.15rem 0;
+  border: 1px solid var(--cr-border);
+  border-radius: 999px;
+  background-color: rgba(15, 15, 15, 0.85);
+  color: var(--cr-text-primary);
+  font-size: 2rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background-color 0.2s;
+  user-select: none;
+
+  &:hover {
+    border-color: var(--cr-orange);
+    color: var(--cr-orange);
+    background-color: rgba(15, 15, 15, 0.95);
+  }
 }
 
 .close-btn {
@@ -42,7 +78,10 @@
   font-size: 1.4rem;
   line-height: 1;
   cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background-color 0.2s;
 
   &:hover {
     border-color: var(--cr-orange);
@@ -57,7 +96,7 @@
 }
 
 .element {
-  width: min(92vw, 1500px);
+  width: min(84vw, 1400px);
   height: min(88vh, 900px);
   display: block;
   object-fit: contain;
@@ -78,8 +117,14 @@ video.element {
     padding: 1rem;
   }
 
+  .nav-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 1.5rem;
+  }
+
   .element {
-    width: 96vw;
+    width: 80vw;
     height: 80vh;
     border-radius: 8px;
   }

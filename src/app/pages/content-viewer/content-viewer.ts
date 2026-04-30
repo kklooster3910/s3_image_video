@@ -13,8 +13,12 @@ import {
   styleUrl: './content-viewer.scss',
 })
 export class ContentViewer {
-  @Input() file: { url: string; type: string } = { url: '', type: '' };
+  @Input() file: { url: string; type: string } = {
+    url: '',
+    type: '',
+  };
   @Output() close = new EventEmitter<void>();
+  @Output() contentScroll = new EventEmitter<string>();
 
   @HostListener('document:keydown.escape')
   onEscapeKey() {

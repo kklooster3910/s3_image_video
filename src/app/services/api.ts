@@ -29,9 +29,9 @@ export class Api {
     throw { status: res.status, ...data };
   };
 
-  handleInvalidResponseAnd404(res: any, data: any) {
+  handleInvalidResponseAndTokenExpiration(res: any, data: any) {
     if (!res.ok) {
-      if (res.status === 404) {
+      if (res.status === 401) {
         localStorage.removeItem('isAuthed');
         this.isAuthed.set('');
       }
@@ -61,14 +61,19 @@ export class Api {
   }
 
   async getFileList(): Promise<
-    { url: string; type: string; key: string }[]
+    {
+      url: string;
+      type: string;
+      key: string;
+      lastModified: string;
+    }[]
   > {
     const response = await fetch(`${this.baseUrl}/file-list`, {
       method: 'GET',
       headers: this.authHeaders(),
     });
     const data = await response.json();
-    this.handleInvalidResponseAnd404(response, data);
+    this.handleInvalidResponseAndTokenExpiration(response, data);
     return data?.imgList ?? [];
   }
 
@@ -83,7 +88,7 @@ export class Api {
       headers: this.authHeaders(),
     });
     const data = await response.json();
-    this.handleInvalidResponseAnd404(response, data);
+    this.handleInvalidResponseAndTokenExpiration(response, data);
 
     await Promise.all(
       data.map((fileUrl: string, idx: number) => {
@@ -107,7 +112,7 @@ export class Api {
       body: JSON.stringify({ fileKey }),
     });
     const data = await response.json();
-    this.handleInvalidResponseAnd404(response, data);
+    this.handleInvalidResponseAndTokenExpiration(response, data);
 
     return data;
   }

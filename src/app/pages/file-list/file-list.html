@@ -19,7 +19,10 @@
           <div class="sort">
             <mat-form-field>
               <mat-label>Sort</mat-label>
-              <mat-select (selectionChange)="sort($event)">
+              <mat-select
+                [value]="activeSort === 'file name' ? 'File Name' : 'Date Created'"
+                (selectionChange)="sort($event)"
+              >
                 @for (option of sortOptions; track option) {
                   <mat-option [value]="option">{{ option }}</mat-option>
                 }

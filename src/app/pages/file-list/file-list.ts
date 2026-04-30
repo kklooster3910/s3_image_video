@@ -29,7 +29,7 @@ type FileListType = {
 export class FileList implements OnInit {
   protected api = inject(Api);
   protected fullList: FileListType[] = [];
-  protected activeSort: 'clear' | 'file name' | 'date created' = 'clear';
+  protected activeSort: 'file name' | 'date created' = 'date created';
   protected activeFilter: 'all' | 'video' | 'image' = 'all';
   protected fileList = signal<FileListType[]>([]);
   protected contentOpen = false;
@@ -42,7 +42,7 @@ export class FileList implements OnInit {
   protected isLoading = signal<boolean>(false);
   protected isTryingToDelete = signal<boolean>(false);
   protected filterOptions: string[] = ['All', 'Video', 'Image'];
-  protected sortOptions: string[] = ['Clear', 'File Name', 'Date Created'];
+  protected sortOptions: string[] = ['File Name', 'Date Created'];
   protected keyToIndex = new Map<string, number>();
   protected pendingDeleteKey: string = '';
 
@@ -128,8 +128,7 @@ export class FileList implements OnInit {
 
   sort(choice: any) {
     const value =
-      choice?.value.toLowerCase() ??
-      ('clear' as 'clear' | 'file name' | 'date created');
+      (choice?.value.toLowerCase() ?? 'file name') || 'date created';
 
     this.activeSort = value;
     this.applyView();

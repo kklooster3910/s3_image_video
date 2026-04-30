@@ -40,6 +40,10 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 // Global button style
 button[type="submit"],
 button.cr-btn {
@@ -103,3 +107,15 @@ a {
     background: var(--cr-orange);
   }
 }
+
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  button[type="submit"],
+  button.cr-btn {
+    min-height: 44px;
+  }
+}
+

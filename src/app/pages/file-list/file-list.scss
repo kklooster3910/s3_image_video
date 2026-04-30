@@ -329,7 +329,70 @@ mat-form-field {
 }
 
 @media (max-width: 768px) {
+  :host {
+    padding: 1rem;
+  }
+
+  .content-state {
+    min-height: calc(100dvh - 56px - 4rem);
+  }
+
+  .options-container {
+    flex-direction: column;
+    gap: 0.65rem;
+
+    .filter,
+    .sort {
+      margin: 0;
+      width: 100%;
+    }
+
+    .sort {
+      margin-left: 0;
+    }
+  }
+
+  mat-form-field {
+    width: 100%;
+    min-width: 0;
+  }
+
+  ul {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .element {
+    height: 140px;
+    max-width: 100%;
+    max-height: none;
+  }
+
+  .empty-state {
+    padding: 2rem 0.5rem;
+  }
+
   .delete-modal {
     padding: 1rem;
+  }
+
+  .delete-modal-actions {
+    .delete-modal-btn {
+      min-height: 40px;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  ul {
+    grid-template-columns: 1fr;
+  }
+
+  .delete-modal-actions {
+    flex-direction: column-reverse;
+
+    .delete-modal-btn {
+      width: 100%;
+    }
   }
 }

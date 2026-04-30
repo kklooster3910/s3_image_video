@@ -97,3 +97,38 @@
   min-height: 100vh;
   background-color: var(--cr-bg-primary);
 }
+
+@media (max-width: 768px) {
+  .cr-nav {
+    height: auto;
+    min-height: 56px;
+    padding: 0.5rem 0.9rem;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .cr-nav-brand {
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .cr-nav-links {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+
+    a {
+      font-size: 0.8rem;
+      padding: 0.35rem 0.6rem;
+    }
+  }
+
+  .cr-nav-logout {
+    margin-left: auto;
+  }
+
+  .content {
+    min-height: calc(100vh - 92px);
+  }
+}
+

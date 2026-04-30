@@ -117,6 +117,11 @@ video.element {
     padding: 1rem;
   }
 
+  .content-shell {
+    width: 100%;
+    gap: 0.6rem;
+  }
+
   .nav-btn {
     width: 2.25rem;
     height: 2.25rem;
@@ -138,3 +143,11 @@ video.element {
     }
   }
 }
+
+@media (max-width: 480px) {
+  .element {
+    width: 92vw;
+    height: 68vh;
+  }
+}
+

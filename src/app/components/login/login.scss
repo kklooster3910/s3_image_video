@@ -99,3 +99,21 @@ input[type='password'] {
   font-size: 0.8rem;
   margin: 2px 0 0;
 }
+
+@media (max-width: 768px) {
+  .login-card {
+    max-width: 100%;
+    padding: 1.5rem 1rem;
+  }
+
+  .login-logo h1 {
+    font-size: 1.5rem;
+  }
+
+  input[type='text'],
+  input[type='password'] {
+    min-height: 44px;
+    padding: 0.6rem 0.75rem;
+  }
+}
+

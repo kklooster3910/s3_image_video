@@ -108,3 +108,23 @@ button[type="submit"] {
   color: var(--cr-error);
   font-size: 0.8rem;
 }
+
+@media (max-width: 768px) {
+  :host {
+    padding: 1rem;
+  }
+
+  .page-header {
+    margin-bottom: 1rem;
+
+    h2 {
+      font-size: 1.2rem;
+    }
+  }
+
+  ngx-mat-dropzone {
+    min-height: 56px;
+    padding: 0.65rem 0.75rem;
+  }
+}
+

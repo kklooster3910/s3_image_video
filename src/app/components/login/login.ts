@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 import { Api } from '../../services/api';
 
-// maybe put this in a types dir lol
+// TODO: put in types dir
 export type LoginCredentials = {
   username: string | null | undefined;
   password: string | null | undefined;

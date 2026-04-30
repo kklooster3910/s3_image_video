@@ -119,7 +119,8 @@ export class FileList implements OnInit {
   }
 
   filter(choice: any) {
-    const value = choice?.value ?? ('all' as 'all' | 'video' | 'image');
+    const value =
+      choice?.value.toLowerCase() ?? ('all' as 'all' | 'video' | 'image');
 
     this.activeFilter = value;
     this.applyView();
@@ -127,7 +128,8 @@ export class FileList implements OnInit {
 
   sort(choice: any) {
     const value =
-      choice?.value ?? ('clear' as 'clear' | 'file name' | 'date created');
+      choice?.value.toLowerCase() ??
+      ('clear' as 'clear' | 'file name' | 'date created');
 
     this.activeSort = value;
     this.applyView();
@@ -136,8 +138,7 @@ export class FileList implements OnInit {
   async ngOnInit() {
     const fileList = await this.getFileList();
     this.fullList = fileList;
-    this.fileList.set(fileList);
-    this.buildIndexMap();
+    this.applyView();
   }
 
   async deleteFile() {
@@ -145,7 +146,8 @@ export class FileList implements OnInit {
       const success = await this.api.deleteFile(this.pendingDeleteKey);
       if (success) {
         const updatedList = await this.api.getFileList();
-        this.fileList.set(updatedList);
+        this.fullList = updatedList;
+        this.applyView();
         this.pendingDeleteKey = '';
       }
     } catch (error) {

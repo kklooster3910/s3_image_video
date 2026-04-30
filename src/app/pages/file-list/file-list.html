@@ -6,6 +6,28 @@
       </div>
     } @else {
       @if (fileList().length === 0) {
+        <div class="options-container">
+          <div class="filter">
+            <mat-form-field>
+              <mat-label>Filter</mat-label>
+              <mat-select (selectionChange)="filter($event)">
+                @for (option of filterOptions; track option) {
+                  <mat-option [value]="option">{{ option }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="sort">
+            <mat-form-field>
+              <mat-label>Sort</mat-label>
+              <mat-select (selectionChange)="sort($event)">
+                @for (option of sortOptions; track option) {
+                  <mat-option [value]="option">{{ option }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
         <p class="empty-state">No media found. Upload something!</p>
       } @else {
         <div class="options-container">

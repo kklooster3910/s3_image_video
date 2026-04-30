@@ -154,6 +154,7 @@ export class FileList implements OnInit {
     } catch (error) {
       this.pendingDeleteKey = '';
       console.error('error deleting file', { error });
+      this.isLoading.set(true);
     }
   }
 

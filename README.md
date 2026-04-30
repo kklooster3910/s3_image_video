@@ -1,5 +1,7 @@
 # VideoHostingS3
 
+Needs to be paired with an API - my project uses https://github.com/kklooster3910/auth_lambda
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.8.
 
 ## Development server
